@@ -1,6 +1,4 @@
-#Day 14
 provider "aws" {
-  region = "us-east-1"
   
 }
 
@@ -14,7 +12,7 @@ resource "aws_instance" "name" {
 }
 terraform {
   backend "s3" {
-    bucket = "state-file-111"
+    bucket = "state-file-111" # you have to create the Bucket in S3 with vesion enabled also you cannot reference the bucket in backend if you try to reference it will give the error 
     key = "terraform.tfstate"
     use_lockfile = true
     region = "us-east-1"
