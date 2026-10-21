@@ -1,0 +1,61 @@
+                                    Terraform workspaces
+
+>>  terraform workspace list
+>>  terraform workspace show
+>>  terraform workspace new dev
+>>  terraform workspace select dev
+>>  terraform workspace select default
+>>  terraform workspace delete dev
+To delete workspace you have to be another workspace otherwise it won't delete it also the workspace should be empty 
+
+To Isolate env's(dev,qa,prod) ==> tfvars + workspaces
+
+>> terraform apply -auto-approve  -var-file="dev.tfvars"
+
+>> Terraform will create the different state file  each environment under terraform.tfstate.d folder 
+
+                                    Terraform CLI
+
+if we didn't provide the values in the variable.tf and not passing the tfvars it will as the values to enter manually whenever we apply it 
+>>  terraform apply -auto-approve
+var.ami
+  Enter a value: 1234
+
+var.instance_name
+  Enter a value: abc
+
+var.instance_type
+  Enter a value: bcd
+
+Method 2:
+>> terraform apply -auto-approve -var="ami=123" -var="instance_name"abc"
+
+                                    TFVARS
+
+~ we user tfvars to store different config
+~ pass the tfvars file while apply command # >> terraform apply -auto-approve  -var-file="dev.tfvars"
+~ NOTE: By default TERRAFORM will take terraform.tfvars file values if we didn't pass the values while apply or destroy 
+~ ALTERNATIVE NAME: terraform.tfvars.json
+
+                                    ENV Variable
+
+~ In Terraform we can pass the vaule via ENV variables as well using EXPORT and $env
+~ Linux:
+    EXPORT TF_VAR_region="us-east-1"
+    EXPORT TF_VAR_instance_type="t3.micro"
+~ Windows:
+    $env : TF_VAR_region="us-east-1"
+    $env : TF_VAR_instance_type="t3.micro"
+
+                                    Variable Precedence
+
+~ CLI > auto.tfvars > terraform.tfvars.json > terraform.tfvars > ENV variables > variable.tf > default
+
+                                    output variable 
+
+~ let say you have created a variable and you want to see the output in console
+Ex:-
+ output "sample" {
+    value = var.instance_name
+  
+}                               
