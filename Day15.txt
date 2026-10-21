@@ -1,0 +1,54 @@
+                                Terraform Taint or replace
+terraform taint  - Recreating same resource  {it will destroy the resource and recreate it with same configuration}
+ terraform state list
+ terraform taint <resource name> => terraform taint aws_instance.abc -> terraform apply auto-approve 
+ above process is old --> New => terraform -auto-approve -replace="aws_instance.abc"
+
+                                Terraform plan output
+ q> I want to store the output of plan for future reference 
+ terraform plan -out <filename> ==> terraform plan devfile
+ terraform apply devfile  --> this will also works since plan has saved already
+ 
+
+                                 Import VS Datablock        
+
+Use import when you want Terraform to manage a bucket that was created outside Terraform.
+ Use a data block when your normal Terraform configuration needs to read an existing bucket's properties.
+
+ import and a data block are not the same, even though both can work with existing infrastructure.
+
+ The main difference is:
+ - data block → Reads information about existing infrastructure.
+ - import → Brings existing infrastructure under Terraform management by associating it with a Terraform resource in the state file.
+
+ Interview tip: A data source reads infrastructure; import brings existing infrastructure into Terraform state for management. Neither automatically means Terraform created that infrastructure.
+ import
+import {
+    id="instance id"
+    to= aws_instance.example  it will update as this resouce name the new going to generate the sate file 
+  
+}
+terraform plan -generate -config-out manual.tf  --> this will generate the config to that file 
+ How to import manual resources --> using import command 
+                                    comments
+ single
+/* multi line */
+                                Terraform Debugging
+Understand the issue effieciently use TF_LOG
+TF_LOG have the one of the log levels , TRACE,DEBUG,WARN or ERROR {verbosity}
+Linux/Max --> EXPORT TF_LOG=TRACE
+              EXPORT TF_LOG_PATH="logs.txt"  save logs for future 
+Windows -->  $ ENV
+
+                                 Terraform Blocks
+                            
+locals block , impicit dependency
+local block used for the repeating multiple times we can define , simply define value once and use for multiple times
+
+Terraform Block --> used to set global config and settings for the terraform, it usually include the required providers , backend config 
+in one single line terraform block we can keep multiple providers 
+
+                                Terraform Graph
+run the command --> terraform graph 
+copy the content
+go to goolge --> graphiz --> you can see in the linkage between resources
