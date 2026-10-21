@@ -1,0 +1,34 @@
+                                    Terraform Modules
+
+~ Terraform Modules will user for the code reusability
+~ it divides the code into a folder structure
+~ This make you code easier to read and understand also reusability accross organization
+~ we can publish modules for other's can user 
+~ each module has separate plugin # when ever you add the module you have to run the Terraform init
+~ Module plugin stored in the .terraform/modules
+
+>> Types
+1> Root Module: This Module is the main module where terraform commands run 
+2> Child Module : This module called by other modules
+
+Key concept: Variables declared in the root module and variables declared in child modules are separate. You must pass values from the root module into child modules through the module block.
+
+Root module can refer both variables & values of child modules
+>> terraform apply -auto-approve -var-file="./modules/ec2/dev.tfvars"    
+
+you can use the remote modules as well what providers will provide it
+
+https://registry.terraform.io/modules/terraform-aws-modules/s3-bucket/aws/latest
+
+Ex:
+module "s3-bucket" {
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "5.17.0"
+}
+
+Modules input & outputs
+                                Condition
+you can use the validation block to validate the variable values 
+
+
+
