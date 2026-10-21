@@ -1,0 +1,10 @@
+                                Terraform Variables
+if the value are keep changing every time we can user Variables
+3 types:
+Local Variables
+input Variables
+output Variables
+
+tfvars
+
+terraform apply -auto-approve  -var-file="dev.tfvars"
